@@ -1,31 +1,59 @@
+function compareNegative(a, b) {
+  if (a > b) return -1;
+  if (a < b) return 1;
+}
+
+function comparePositive(a, b) {
+  if (a > b) return 1;
+  if (a < b) return -1;
+}
+
 class Sorter {
   constructor() {
-    // your implementation
+      this.arr = [];
+      // your implementation
   }
 
   add(element) {
-    // your implementation
+      this.arr.push(element);
+      // your implementation
   }
 
   at(index) {
-    // your implementation
+      return this.arr[index]; 
+      // your implementation
   }
 
   get length() {
-    // your implementation
+      return this.arr.length;
+      // your implementation
   }
 
   toArray() {
-    // your implementation
+      return this.arr;           
+       // your implementation
   }
 
   sort(indices) {
-    // your implementation
+      var m = [];
+      for (var i = 0; i < indices.length; i++) {
+          m.push(this.arr[indices[i]]);
+      }
+      if (indices[0] > indices[1])
+          m.sort(compareNegative);
+      else
+          m.sort(comparePositive);
+
+      for (var i = 0; i < indices.length; i++) {
+          this.arr[indices[i]] = m[i];
+      }
+      // your implementation
   }
 
   setComparator(compareFunction) {
-    // your implementation
+      this.arr.sort(compareFunction);
+      // your implementation
   }
-}
+};
 
 module.exports = Sorter;
