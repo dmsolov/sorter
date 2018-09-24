@@ -1,16 +1,11 @@
-function compareNegative(a, b) {
-  if (a > b) return -1;
-  if (a < b) return 1;
-}
 
-function comparePositive(a, b) {
-  if (a > b) return 1;
-  if (a < b) return -1;
+  function compareNum(a,b){
+    return a - b;
 }
-
 class Sorter {
   constructor() {
       this.arr = [];
+      this.compareFunction = undefined;
       // your implementation
   }
 
@@ -30,30 +25,35 @@ class Sorter {
   }
 
   toArray() {
-      return this.arr;           
-       // your implementation
+      return this.arr;            // your implementation
   }
 
   sort(indices) {
-      var m = [];
-      for (var i = 0; i < indices.length; i++) {
-          m.push(this.arr[indices[i]]);
+      var tmp = [];
+      for (let i = 0; i < indices.length; i++) {
+          tmp.push(this.arr[indices[i]]);
       }
-      if (indices[0] > indices[1])
-          m.sort(compareNegative);
-      else
-          m.sort(comparePositive);
+      if (this.compareFunction){
+          tmp.sort(this.compareFunction);
+      }
+      else{
+          tmp.sort(compareNum);
+      }
 
-      for (var i = 0; i < indices.length; i++) {
-          this.arr[indices[i]] = m[i];
+          indices.sort(compareNum);
+
+      for (let i = 0; i < indices.length; i++) {
+          this.arr[indices[i]] = tmp[i];
       }
       // your implementation
   }
 
   setComparator(compareFunction) {
-      this.arr.sort(compareFunction);
+      this.compareFunction = compareFunction;
       // your implementation
   }
+ 
 };
+
 
 module.exports = Sorter;
